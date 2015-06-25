@@ -4,6 +4,7 @@ function parseJSON (data) {
 
 function requestedResponse () {
     config = JSON.parse(this.responseText)
+    console.log(config)
 
     var script = document.createElement('script')
     script.src = '//spreadsheets.google.com/feeds/list/'+config.spreadsheet+'/'+config.sheet[0]+'/public/values?alt=json-in-script&callback=parseJSON'
