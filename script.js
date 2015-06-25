@@ -7,7 +7,7 @@ function requestedResponse () {
     console.log(config)
 
     var script = document.createElement('script')
-    script.src = '//spreadsheets.google.com/feeds/list/'+config.spreadsheet+'/'+config.sheets[0]+'/public/values?alt=json-in-script&callback=parseJSON'
+    script.src = '//spreadsheets.google.com/feeds/list/'+config.spreadsheet+'/'+config.sheets[0].id+'/public/values?alt=json-in-script&callback=parseJSON'
 
     document.head.appendChild(script)
 }
