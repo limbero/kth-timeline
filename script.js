@@ -3,8 +3,8 @@ var counter = 0
 
 function parseJSON (data) {
     for(entry of data.feed.entry)
-        if(entry.hasOwnProperty('gsx$datum') && entry.gsx$datum.$t !== '')
-            klaradekurser.push([entry.gsx$kurs.$t,entry.gsx$datum.$t])
+        if(entry.hasOwnProperty('gsx$slutdatum') && entry.gsx$slutdatum.$t !== '')
+            klaradekurser.push([entry.gsx$kurs.$t,entry.gsx$slutdatum.$t])
 
     counter++ //use this for progress bar?
     if (counter == config.sheets.length) {
