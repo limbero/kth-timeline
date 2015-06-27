@@ -6,3 +6,53 @@ body {
 
     font-family: 'Roboto Slab';
 }
+
+h1 {
+    text-align: center;
+}
+
+#graph {
+    padding: 0 20px 20px;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+.kurs {
+    position: relative;
+    color: #000;
+    border-color: #000;
+    transition: color 0.5s, border-color 0.5s;
+}
+.kurs.done {
+    color: #5C5;
+    border-color: #5C5;
+    transition: color 0.5s, border-color 0.5s;
+}
+.kurs.show {
+    -webkit-animation: fadein 0.5s;
+    animation: fadein 0.5s;
+    opacity: 1;
+}
+
+.kurs p {
+    font-size: 12px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+}
+.kurs .line {
+    width: 100%;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-color: inherit;
+}
+
+@-webkit-keyframes fadein {
+    0% {opacity: 0}
+    50% {opacity: 0}
+    100% {opacity: 1}
+}
+@keyframes fadein {
+    0% {opacity: 0}
+    50% {opacity: 0}
+    100% {opacity: 1}
+}
