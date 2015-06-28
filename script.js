@@ -64,6 +64,8 @@ function timeTravel() {
             startadekurser = startadekurser.sort(slutComparator)
         }
     }
+
+    //bi-yearly date markers
     if( (now.getMonth() == 0 && now.getDate() == 1) ||  (now.getMonth() == 6 && now.getDate() == 1) ) {
         var element = document.createElement('div')
         element.className = 'marker'
@@ -74,6 +76,7 @@ function timeTravel() {
         document.getElementById('graph').appendChild(element)
     }
 
+    //keeps 'em growing
     var courselines = document.getElementsByClassName('kurs active')
     for(var i = 0; i < courselines.length; i++) {
         var right = (100*(now.getTime()-ORIGIN.getTime())/(TODAY.getTime()-ORIGIN.getTime()))
@@ -83,12 +86,14 @@ function timeTravel() {
         courselines[i].style.width = right-left+'%'
     }
 
+    //kills courses when they're done
     while(startadekurser.length > 0 && dateString === startadekurser[0].slutdatum) {
         var kurs = startadekurser.shift()
         document.getElementById(kurs.kurskod).classList.remove('active')
         document.getElementById(kurs.kurskod).classList.add('done')
     }
 
+    //don't go into the actual future, stop if it's today
     if( new Date(dateString).getFullYear() !== TODAY.getFullYear() || new Date(dateString).getMonth() !== TODAY.getMonth() || new Date(dateString).getDate() !== TODAY.getDate() )
         setTimeout(timeTravel, 50)
 }
