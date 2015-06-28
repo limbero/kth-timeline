@@ -32,20 +32,26 @@ h1 {
 }
 #graph .marker p {
     margin: 0;
-    transform: rotate(90deg);
-    transform-origin: left top;
+    -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+    -webkit-transform-origin: left top;
+        -ms-transform-origin: left top;
+            transform-origin: left top;
 }
 
 .kurs {
     position: relative;
     color: #000;
     border-color: #000;
-    transition: color 0.5s, border-color 0.5s;
+    -webkit-transition: color 0.5s, border-color 0.5s;
+            transition: color 0.5s, border-color 0.5s;
 }
 .kurs.done {
     color: #5C5;
     border-color: #5C5;
-    transition: color 0.5s, border-color 0.5s;
+    -webkit-transition: color 0.5s, border-color 0.5s;
+            transition: color 0.5s, border-color 0.5s;
 }
 .kurs.show {
     -webkit-animation: fadein 0.5s;
