@@ -19,6 +19,7 @@ h1 {
 }
 
 #graph .marker {
+    min-height: 97.5vh;
     height: calc(100% + 85px);
     position: absolute;
     top: -75px;
@@ -29,6 +30,10 @@ h1 {
     font-weight: 100;
     font-size: 12px;
     border-left: 1px solid #CCC;
+
+    -webkit-animation: fadein 0.5s;
+    animation: fadein 0.5s;
+    opacity: 1;
 }
 #graph .marker p {
     margin: 0;
@@ -63,6 +68,9 @@ h1 {
     font-size: 14px;
     margin-bottom: 2px;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 100px;
 }
 .kurs .line {
     width: 100%;
