@@ -7,8 +7,8 @@ var counter = 0
 
 function parseJSON (data) {
     for(entry of data.feed.entry)
-    if(entry.hasOwnProperty('gsx$startdatum') && entry.gsx$startdatum.$t !== '')
-    kurser.push({"kurskod":entry.gsx$kurskod.$t,"kursnamn":entry.gsx$kurs.$t,"startdatum":entry.gsx$startdatum.$t,"slutdatum":entry.gsx$slutdatum.$t})
+        if(entry.hasOwnProperty('gsx$startdatum') && entry.gsx$startdatum.$t !== '')
+            kurser.push({"kurskod":entry.gsx$kurskod.$t,"kursnamn":entry.gsx$kurs.$t,"startdatum":entry.gsx$startdatum.$t,"slutdatum":entry.gsx$slutdatum.$t})
 
     counter++ //use this for progress bar?
     if(counter == config.sheets.length) {
@@ -90,7 +90,7 @@ function timeTravel() {
     }
 
     if( new Date(dateString).getFullYear() !== TODAY.getFullYear() || new Date(dateString).getMonth() !== TODAY.getMonth() || new Date(dateString).getDate() !== TODAY.getDate() )
-    setTimeout(timeTravel, 50)
+        setTimeout(timeTravel, 50)
 }
 
 var request = new XMLHttpRequest()
