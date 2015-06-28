@@ -10,6 +10,9 @@ body {
 h1 {
     text-align: center;
     font-family: 'Roboto';
+
+    position: relative;
+    z-index: 1;
 }
 
 #graph {
@@ -22,6 +25,7 @@ h1 {
     min-height: 97.5vh;
     height: calc(100% + 85px);
     position: absolute;
+    z-index: -1;
     top: -75px;
     padding-top: 5px;
 
