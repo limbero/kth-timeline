@@ -40,12 +40,15 @@ function timeTravel() {
 
     while(kurser.length > 0 && dateString === kurser[0].startdatum) {
         var kurs = kurser.shift()
-        
+
         var element = document.createElement('div')
         element.id = kurs.kurskod
         element.className = 'kurs active'
+        element.style.left = (100*(now.getTime()-ORIGIN.getTime())/(TODAY.getTime()-ORIGIN.getTime()))+'%'
+
         var p = document.createElement('p')
         p.innerHTML = kurs.kursnamn
+
         var div = document.createElement('div')
         div.id = kurs.kurskod+'line'
         div.className = 'line'
@@ -54,13 +57,21 @@ function timeTravel() {
         element.appendChild(div)
         document.getElementById('graph').appendChild(element)
 
-        document.getElementById(kurs.kurskod).style.left = (100*(now.getTime()-ORIGIN.getTime())/(TODAY.getTime()-ORIGIN.getTime()))+'%'
-        document.getElementById(kurs.kurskod).classList.add('show')
+        element.classList.add('show')
 
         if(kurs.slutdatum !== '') {
             startadekurser.push(kurs)
             startadekurser = startadekurser.sort(slutComparator)
         }
+    }
+    if( (now.getMonth() == 0 && now.getDate() == 1) ||  (now.getMonth() == 6 && now.getDate() == 1) ) {
+        var element = document.createElement('div')
+        element.className = 'marker'
+        var p = document.createElement('p')
+        p.innerHTML = dateString
+        element.appendChild(p)
+        element.style.left = (100*(now.getTime()-ORIGIN.getTime())/(TODAY.getTime()-ORIGIN.getTime()))+'%'
+        document.getElementById('graph').appendChild(element)
     }
 
     var courselines = document.getElementsByClassName('kurs active')
