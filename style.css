@@ -33,6 +33,7 @@ h1 {
     font-family: 'Roboto';
     font-weight: 100;
     font-size: 12px;
+    white-space: nowrap;
     border-left: 1px solid #CCC;
 
     -webkit-animation: fadein 0.5s;
