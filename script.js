@@ -12,7 +12,6 @@ function parseJSON (data) {
 
     counter++ //use this for progress bar?
     if(counter == config.sheets.length) {
-        console.log(kurser)
         kurser = kurser.sort(startComparator)
         timeTravel()
     }
@@ -38,6 +37,7 @@ function timeTravel() {
 
     document.getElementById('timemachine').innerHTML = dateString
 
+    //starts of courses on the right date
     while(kurser.length > 0 && dateString === kurser[0].startdatum) {
         var kurs = kurser.shift()
 
