@@ -19,6 +19,7 @@ h1 {
     position: relative;
     margin: 0 auto 20px;
     width: 95vw;
+    overflow: hidden;
 }
 
 #graph .marker {
@@ -26,7 +27,7 @@ h1 {
     height: calc(100% + 85px);
     position: absolute;
     z-index: -1;
-    top: -75px;
+    top: 0;
     padding-top: 5px;
 
     color: #AAA;
@@ -73,9 +74,6 @@ h1 {
     font-size: 14px;
     margin-bottom: 2px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 100px;
 }
 .kurs .line {
     width: 100%;
