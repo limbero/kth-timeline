@@ -1,15 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700|Roboto:100,700,900);
+@import url(https://fonts.googleapis.com/css?family=PT+Serif:400|Roboto:100,700,900);
 
 body {
     background: #FFF;
-    color: #222;
+    color: hsl(15, 72%, 20%);
 
-    font-family: 'Roboto Slab';
+    font-family: 'PT Serif';
 }
 
 h1 {
     text-align: center;
     font-family: 'Roboto';
+    font-weight: 900;
 
     position: relative;
     z-index: 1;
@@ -19,6 +20,7 @@ h1 {
     position: relative;
     margin: 0 auto 20px;
     width: 95vw;
+    min-height: 86vh;
     overflow: hidden;
 }
 
@@ -53,14 +55,14 @@ h1 {
 
 .kurs {
     position: relative;
-    color: #000;
-    border-color: #000;
+    color: hsl(15, 22%, 30%);
+    border-color: hsl(15, 22%, 30%);
     -webkit-transition: color 0.5s, border-color 0.5s;
             transition: color 0.5s, border-color 0.5s;
 }
 .kurs.done {
-    color: #5C5;
-    border-color: #5C5;
+    color: hsl(164,100%,40%);
+    border-color: hsl(164,100%,40%);
     -webkit-transition: color 0.5s, border-color 0.5s;
             transition: color 0.5s, border-color 0.5s;
 }
