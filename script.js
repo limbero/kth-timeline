@@ -118,8 +118,8 @@ function slutComparator(a,b){
     return 0
 }
 function getTextWidth(text) {
-    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"))
-    var context = canvas.getContext("2d")
+    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'))
+    var context = canvas.getContext('2d')
     context.font = '14px PT Serif'
     var metrics = context.measureText(text)
     return metrics.width
