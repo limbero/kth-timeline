@@ -1,99 +1,99 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Serif:400|Roboto:100,700,900);
 
 body {
-    background: #FFF;
-    color: hsl(15, 72%, 20%);
+  background: #FFF;
+  color: hsl(15, 72%, 20%);
 
-    font-family: 'PT Serif';
+  font-family: 'PT Serif';
 }
 
 h1 {
-    text-align: center;
-    font-family: 'Roboto';
-    font-weight: 900;
+  text-align: center;
+  font-family: 'Roboto';
+  font-weight: 900;
 
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 #graph {
-    position: relative;
-    margin: 0 auto 20px;
-    width: 95vw;
-    min-height: 86vh;
-    overflow: hidden;
+  position: relative;
+  margin: 0 auto 20px;
+  width: 95vw;
+  min-height: 86vh;
+  overflow: hidden;
 }
 
 #graph .marker {
-    min-height: 97.5vh;
-    height: calc(100% + 85px);
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    padding-top: 5px;
+  min-height: 97.5vh;
+  height: calc(100% + 85px);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  padding-top: 5px;
 
-    color: #AAA;
-    font-family: 'Roboto';
-    font-weight: 100;
-    font-size: 12px;
-    white-space: nowrap;
-    border-left: 1px solid #CCC;
+  color: #AAA;
+  font-family: 'Roboto';
+  font-weight: 100;
+  font-size: 12px;
+  white-space: nowrap;
+  border-left: 1px solid #CCC;
 
-    -webkit-animation: fadein 0.5s;
-    animation: fadein 0.5s;
-    opacity: 1;
+  -webkit-animation: fadein 0.5s;
+          animation: fadein 0.5s;
+  opacity: 1;
 }
 #graph .marker p {
-    margin: 0;
-    -webkit-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-            transform: rotate(90deg);
-    -webkit-transform-origin: left top;
-        -ms-transform-origin: left top;
-            transform-origin: left top;
+  margin: 0;
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+  -webkit-transform-origin: left top;
+      -ms-transform-origin: left top;
+          transform-origin: left top;
 }
 
 .kurs {
-    position: relative;
-    color: hsl(15, 22%, 30%);
-    border-color: hsl(15, 22%, 30%);
-    -webkit-transition: color 0.5s, border-color 0.5s;
-            transition: color 0.5s, border-color 0.5s;
+  position: relative;
+  color: hsl(15, 22%, 30%);
+  border-color: hsl(15, 22%, 30%);
+  -webkit-transition: color 0.5s, border-color 0.5s;
+          transition: color 0.5s, border-color 0.5s;
 }
 .kurs.done {
-    color: hsl(164,100%,40%);
-    border-color: hsl(164,100%,40%);
-    -webkit-transition: color 0.5s, border-color 0.5s;
-            transition: color 0.5s, border-color 0.5s;
+  color: hsl(164,100%,40%);
+  border-color: hsl(164,100%,40%);
+  -webkit-transition: color 0.5s, border-color 0.5s;
+          transition: color 0.5s, border-color 0.5s;
 }
 .kurs.show {
-    -webkit-animation: fadein 0.5s;
-    animation: fadein 0.5s;
-    opacity: 1;
+  -webkit-animation: fadein 0.5s;
+          animation: fadein 0.5s;
+  opacity: 1;
 }
 
 .kurs p {
-    font-size: 14px;
-    margin-bottom: 2px;
-    white-space: nowrap;
+  font-size: 14px;
+  margin-bottom: 2px;
+  white-space: nowrap;
 }
 .kurs p.keepinside {
-    direction: rtl;
+  direction: rtl;
 }
 .kurs .line {
-    width: 100%;
-    border-top-width: 2px;
-    border-top-style: solid;
-    border-color: inherit;
+  width: 100%;
+  border-top-width: 2px;
+  border-top-style: solid;
+  border-color: inherit;
 }
 
 @-webkit-keyframes fadein {
     0% {opacity: 0}
-    50% {opacity: 0}
-    100% {opacity: 1}
+   50% {opacity: 0}
+  100% {opacity: 1}
 }
 @keyframes fadein {
     0% {opacity: 0}
-    50% {opacity: 0}
-    100% {opacity: 1}
+   50% {opacity: 0}
+  100% {opacity: 1}
 }
