@@ -12,8 +12,7 @@ function parseJSON (data) {
 
   counter++ //use this for progress bar?
   if(counter == config.sheets.length) {
-    kurser = kurser.sort(slutComparator)
-    kurser = kurser.sort(startComparator)
+    kurser = kurser.sort(startOchSlutComparator)
     timeTravel()
   }
 }
@@ -108,10 +107,16 @@ request.open('get', 'config.json', true)
 request.send()
 
 //helper functions for sorting
-function startComparator(a,b){
-  if(a.startdatum < b.startdatum) return -1
-  if(a.startdatum > b.startdatum) return 1
-  return 0
+function startOchSlutComparator(a,b){
+  var val = 0
+  if(a.startdatum < b.startdatum) val = -1
+  else if(a.startdatum > b.startdatum) val = 1
+  else if(a.slutdatum === "" && b.slutdatum === "") val = 0
+  else if(b.slutdatum === "") val = -1
+  else if(a.slutdatum === "") val = 1
+  else if(a.slutdatum < b.slutdatum) val = -1
+  else if(a.slutdatum > b.slutdatum) val = 1
+  return val
 }
 function slutComparator(a,b){
   var val = 0
