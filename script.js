@@ -30,14 +30,14 @@ function requestedResponse () {
 function timeTravel() {
   var now = new Date(document.getElementById('timemachine').innerHTML)
   now.setDate(now.getDate()+1)
-  
+
   dateString = now.getFullYear()+'-'
   dateString += ((now.getMonth()+1) < 10 ? '0'+(now.getMonth()+1) : (now.getMonth()+1))+'-'
   dateString += ((now.getDate()) < 10 ? '0'+(now.getDate()) : (now.getDate()))
 
   document.getElementById('timemachine').innerHTML = dateString
 
-  //starts of courses on the right date
+  //starts off courses on the right date
   while(kurser.length > 0 && dateString === kurser[0].startdatum) {
     var kurs = kurser.shift()
 
