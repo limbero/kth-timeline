@@ -84,6 +84,9 @@ function timeTravel() {
         left = parseFloat(left.substring(0, left.length - 1))
 
         courselines[i].style.width = right-left+'%'
+        if(document.getElementById('graph').getBoundingClientRect().right - courselines[i].getBoundingClientRect().left - getTextWidth(courselines[i].getElementsByTagName('p')[0].innerHTML) < 0) {
+            courselines[i].getElementsByTagName('p')[0].classList.add('keepinside')
+        }
     }
 
     //kills courses when they're done
@@ -113,4 +116,11 @@ function slutComparator(a,b){
     if(a.slutdatum < b.slutdatum) return -1
     if(a.slutdatum > b.slutdatum) return 1
     return 0
+}
+function getTextWidth(text) {
+    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"))
+    var context = canvas.getContext("2d")
+    context.font = '14px PT Serif'
+    var metrics = context.measureText(text)
+    return metrics.width
 }
