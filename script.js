@@ -84,9 +84,6 @@ function timeTravel() {
     left = parseFloat(left.substring(0, left.length - 1))
 
     courselines[i].style.width = right-left+'%'
-    if(document.getElementById('graph').getBoundingClientRect().right - courselines[i].getBoundingClientRect().left - getTextWidth(courselines[i].getElementsByTagName('p')[0].innerHTML) < 0) {
-      courselines[i].getElementsByTagName('p')[0].classList.add('keepinside')
-    }
   }
 
   //kills courses when they're done
@@ -94,6 +91,16 @@ function timeTravel() {
     var kurs = startadekurser.shift()
     document.getElementById(kurs.kurskod).classList.remove('active')
     document.getElementById(kurs.kurskod).classList.add('done')
+  }
+
+  //styling for all courses, done and ongoing
+  courselines = document.getElementsByClassName('kurs')
+  for(var i = 0; i < courselines.length; i++) {
+    if(document.getElementById('graph').getBoundingClientRect().right - courselines[i].getBoundingClientRect().left - getTextWidth(courselines[i].getElementsByTagName('p')[0].innerHTML) < 0) {
+      courselines[i].getElementsByTagName('p')[0].classList.add('keepinside')
+    } else {
+      courselines[i].getElementsByTagName('p')[0].classList.remove('keepinside')
+    }
   }
 
   //don't go into the actual future, stop if it's today
