@@ -94,7 +94,15 @@ function timeTravel() {
   }
 
   //styling for all courses, done and ongoing
-  courselines = document.getElementsByClassName('kurs')
+  fitCourseNamesInGraph()
+
+  //don't go into the actual future, stop if it's today
+  if( new Date(dateString).getFullYear() !== TODAY.getFullYear() || new Date(dateString).getMonth() !== TODAY.getMonth() || new Date(dateString).getDate() !== TODAY.getDate() )
+    setTimeout(timeTravel, 50)
+}
+
+function fitCourseNamesInGraph() {
+  var courselines = document.getElementsByClassName('kurs')
   for(var i = 0; i < courselines.length; i++) {
     if(document.getElementById('graph').getBoundingClientRect().right - courselines[i].getBoundingClientRect().left - getTextWidth(courselines[i].getElementsByTagName('p')[0].innerHTML) < 0) {
       courselines[i].getElementsByTagName('p')[0].classList.add('keepinside')
@@ -102,16 +110,13 @@ function timeTravel() {
       courselines[i].getElementsByTagName('p')[0].classList.remove('keepinside')
     }
   }
-
-  //don't go into the actual future, stop if it's today
-  if( new Date(dateString).getFullYear() !== TODAY.getFullYear() || new Date(dateString).getMonth() !== TODAY.getMonth() || new Date(dateString).getDate() !== TODAY.getDate() )
-    setTimeout(timeTravel, 50)
 }
 
 var request = new XMLHttpRequest()
 request.onload = requestedResponse
 request.open('get', 'config.json', true)
 request.send()
+window.addEventListener('resize', fitCourseNamesInGraph)
 
 //helper functions for sorting
 function startOchSlutComparator(a,b){
