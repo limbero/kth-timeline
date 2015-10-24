@@ -108,15 +108,9 @@ request.send()
 
 //helper functions for sorting
 function startOchSlutComparator(a,b){
-  var val = 0
-  if(a.startdatum < b.startdatum) val = -1
-  else if(a.startdatum > b.startdatum) val = 1
-  else if(a.slutdatum === "" && b.slutdatum === "") val = 0
-  else if(b.slutdatum === "") val = -1
-  else if(a.slutdatum === "") val = 1
-  else if(a.slutdatum < b.slutdatum) val = -1
-  else if(a.slutdatum > b.slutdatum) val = 1
-  return val
+  if(a.startdatum < b.startdatum) return -1
+  else if(a.startdatum > b.startdatum) return 1
+  else return slutComparator(a,b)
 }
 function slutComparator(a,b){
   var val = 0
