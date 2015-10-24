@@ -105,7 +105,7 @@ function timeTravel() {
 
   //don't go into the actual future, stop if it's today
   if( new Date(dateString).getFullYear() !== TODAY.getFullYear() || new Date(dateString).getMonth() !== TODAY.getMonth() || new Date(dateString).getDate() !== TODAY.getDate() )
-  setTimeout(timeTravel, 50)
+    setTimeout(timeTravel, 50)
 }
 
 var request = new XMLHttpRequest()
