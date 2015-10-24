@@ -12,6 +12,7 @@ function parseJSON (data) {
 
   counter++ //use this for progress bar?
   if(counter == config.sheets.length) {
+    kurser = kurser.sort(slutComparator)
     kurser = kurser.sort(startComparator)
     timeTravel()
   }
@@ -113,9 +114,14 @@ function startComparator(a,b){
   return 0
 }
 function slutComparator(a,b){
-  if(a.slutdatum < b.slutdatum) return -1
-  if(a.slutdatum > b.slutdatum) return 1
-  return 0
+  var val = 0
+  if(a.slutdatum === "" && b.slutdatum === "") val = 0
+  else if(b.slutdatum === "") val = -1
+  else if(a.slutdatum === "") val = 1
+  else if(a.slutdatum < b.slutdatum) val = -1
+  else if(a.slutdatum > b.slutdatum) val = 1
+
+  return val
 }
 function getTextWidth(text) {
   var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'))
