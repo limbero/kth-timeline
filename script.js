@@ -29,11 +29,11 @@ function requestedResponse () {
 
 function timeTravel() {
   var now = new Date(document.getElementById('timemachine').innerHTML)
-  now.setDate(now.getDate()+1)
+  now.setUTCDate(now.getUTCDate()+1)
 
-  dateString = now.getFullYear()+'-'
-  dateString += ((now.getMonth()+1) < 10 ? '0'+(now.getMonth()+1) : (now.getMonth()+1))+'-'
-  dateString += ((now.getDate()) < 10 ? '0'+(now.getDate()) : (now.getDate()))
+  dateString = now.getUTCFullYear()+'-'
+  dateString += ((now.getUTCMonth()+1) < 10 ? '0'+(now.getUTCMonth()+1) : (now.getUTCMonth()+1))+'-'
+  dateString += ((now.getUTCDate()) < 10 ? '0'+(now.getUTCDate()) : (now.getUTCDate()))
 
   document.getElementById('timemachine').innerHTML = dateString
 
@@ -66,7 +66,7 @@ function timeTravel() {
   }
 
   //bi-yearly date markers
-  if( (now.getMonth() == 0 && now.getDate() == 1) ||  (now.getMonth() == 6 && now.getDate() == 1) ) {
+  if( (now.getUTCMonth() == 0 && now.getUTCDate() == 1) ||  (now.getUTCMonth() == 6 && now.getUTCDate() == 1) ) {
     var element = document.createElement('div')
     element.className = 'marker'
     var p = document.createElement('p')
@@ -97,7 +97,7 @@ function timeTravel() {
   fitCourseNamesInGraph()
 
   //don't go into the actual future, stop if it's today
-  if( new Date(dateString).getFullYear() !== TODAY.getFullYear() || new Date(dateString).getMonth() !== TODAY.getMonth() || new Date(dateString).getDate() !== TODAY.getDate() )
+  if( new Date(dateString).getUTCFullYear() !== TODAY.getUTCFullYear() || new Date(dateString).getUTCMonth() !== TODAY.getUTCMonth() || new Date(dateString).getUTCDate() !== TODAY.getUTCDate() )
     setTimeout(timeTravel, 50)
 }
 
