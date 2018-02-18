@@ -1,9 +1,11 @@
-var ORIGIN = new Date('2011-08-15')
+const ORIGIN = new Date('2011-08-15')
 var TODAY = new Date()
+const LINE_HEIGHT = 30;
 
 var kurser = []
 var startadekurser = []
 var counter = 0
+
 
 function parseJSON (data) {
   for (entry of data.feed.entry) {
@@ -42,6 +44,7 @@ function timeTravel() {
 
   document.getElementById('timemachine').innerHTML = dateString
 
+  let line = 0;
   //starts off courses on the right date
   while (kurser.length > 0 && dateString === kurser[0].startdatum) {
     var kurs = kurser.shift()
@@ -50,6 +53,7 @@ function timeTravel() {
     element.id = kurs.kurskod
     element.className = 'kurs active'
     element.style.left = (100*(now.getTime()-ORIGIN.getTime())/(TODAY.getTime()-ORIGIN.getTime()))+'%'
+    element.style.position = 'absolute';
 
     var p = document.createElement('p')
     p.innerHTML = kurs.kursnamn
@@ -60,6 +64,12 @@ function timeTravel() {
 
     element.appendChild(p)
     element.appendChild(div)
+
+    while (fitsOnLine(element, line, now)) {
+      line++;
+    }
+    element.style.top = line * LINE_HEIGHT + 'px';
+
     document.getElementById('graph').appendChild(element)
 
     element.classList.add('show')
@@ -145,4 +155,52 @@ function getTextWidth(text) {
   context.font = '14px PT Serif'
   var metrics = context.measureText(text)
   return metrics.width
+}
+
+function willFitWithLeftAdjustedText(el, nowPoint) {
+  if (document.getElementById('graph').getBoundingClientRect().right - nowPoint - getTextWidth(el.getElementsByTagName('p')[0].innerHTML) >= 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// line is not occupied if it contains 0 active lines
+// AND
+// the rightmost point of any of its done lines is to the left of
+// the leftmost point of the new element
+function fitsOnLine(el, n, now) {
+  const doneLines = document.querySelectorAll('.kurs:not(.active)');
+  const runningLines = document.querySelectorAll('.kurs.active');
+  for (let i = 0; i < runningLines.length; i ++) {
+    const lineNum = parseInt(runningLines[i].style.top.slice(0, -2)) / LINE_HEIGHT;
+    if (lineNum === n) {
+      return true;
+    }
+  }
+  for (let i = 0; i < doneLines.length; i ++) {
+    const lineNum = parseInt(doneLines[i].style.top.slice(0, -2)) / LINE_HEIGHT;
+    if (lineNum === n) {
+      let rightMostPoint = getTextWidth(doneLines[i].querySelector('p').innerText);
+      rightMostPoint += doneLines[i].getBoundingClientRect().left;
+      if (doneLines[i].getBoundingClientRect().right > rightMostPoint) {
+        rightMostPoint = doneLines[i].getBoundingClientRect().right;
+      }
+
+      let outerBox = document.getElementById('graph').getBoundingClientRect();
+      let nowPoint = (now.getTime()-ORIGIN.getTime()) / (TODAY.getTime()-ORIGIN.getTime());
+      nowPoint *= outerBox.width;
+      nowPoint += outerBox.left;
+
+      console.log(willFitWithLeftAdjustedText(el, nowPoint), el);
+      if (!willFitWithLeftAdjustedText(el, nowPoint)) {
+        if (nowPoint - getTextWidth(el.querySelector('p').innerText) < rightMostPoint) {
+          return true;
+        }
+      } else if (nowPoint < rightMostPoint) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
