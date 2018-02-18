@@ -6,12 +6,14 @@ var startadekurser = []
 var counter = 0
 
 function parseJSON (data) {
-  for(entry of data.feed.entry)
-  if(entry.hasOwnProperty('gsx$startdatum') && entry.gsx$startdatum.$t !== '')
-  kurser.push({"kurskod":entry.gsx$kurskod.$t,"kursnamn":entry.gsx$kurs.$t,"startdatum":entry.gsx$startdatum.$t,"slutdatum":entry.gsx$slutdatum.$t})
+  for (entry of data.feed.entry) {
+    if (entry.hasOwnProperty('gsx$startdatum') && entry.gsx$startdatum.$t !== '') {
+      kurser.push({"kurskod":entry.gsx$kurskod.$t,"kursnamn":entry.gsx$kurs.$t,"startdatum":entry.gsx$startdatum.$t,"slutdatum":entry.gsx$slutdatum.$t})
+    }
+  }
 
   counter++ //use this for progress bar?
-  if(counter == config.sheets.length) {
+  if (counter == config.sheets.length) {
     kurser = kurser.sort(startOchSlutComparator)
     timeTravel()
   }
@@ -20,7 +22,7 @@ function parseJSON (data) {
 function requestedResponse () {
   config = JSON.parse(this.responseText)
 
-  for(sheet of config.sheets) {
+  for (sheet of config.sheets) {
     var script = document.createElement('script')
     script.src = '//spreadsheets.google.com/feeds/list/'+config.spreadsheet+'/'+sheet.id+'/public/values?alt=json-in-script&callback=parseJSON'
     document.head.appendChild(script)
@@ -38,7 +40,7 @@ function timeTravel() {
   document.getElementById('timemachine').innerHTML = dateString
 
   //starts off courses on the right date
-  while(kurser.length > 0 && dateString === kurser[0].startdatum) {
+  while (kurser.length > 0 && dateString === kurser[0].startdatum) {
     var kurs = kurser.shift()
 
     var element = document.createElement('div')
@@ -66,7 +68,7 @@ function timeTravel() {
   }
 
   //bi-yearly date markers
-  if( (now.getUTCMonth() == 0 && now.getUTCDate() == 1) ||  (now.getUTCMonth() == 6 && now.getUTCDate() == 1) ) {
+  if ( (now.getUTCMonth() == 0 && now.getUTCDate() == 1) ||  (now.getUTCMonth() == 6 && now.getUTCDate() == 1) ) {
     var element = document.createElement('div')
     element.className = 'marker'
     var p = document.createElement('p')
@@ -78,7 +80,7 @@ function timeTravel() {
 
   //keeps 'em growing
   var courselines = document.getElementsByClassName('kurs active')
-  for(var i = 0; i < courselines.length; i++) {
+  for (var i = 0; i < courselines.length; i++) {
     var right = (100*(now.getTime()-ORIGIN.getTime())/(TODAY.getTime()-ORIGIN.getTime()))
     var left = courselines[i].style.left
     left = parseFloat(left.substring(0, left.length - 1))
@@ -87,7 +89,7 @@ function timeTravel() {
   }
 
   //kills courses when they're done
-  while(startadekurser.length > 0 && dateString === startadekurser[0].slutdatum) {
+  while (startadekurser.length > 0 && dateString === startadekurser[0].slutdatum) {
     var kurs = startadekurser.shift()
     document.getElementById(kurs.kurskod).classList.remove('active')
     document.getElementById(kurs.kurskod).classList.add('done')
@@ -97,14 +99,14 @@ function timeTravel() {
   fitCourseNamesInGraph()
 
   //don't go into the actual future, stop if it's today
-  if( new Date(dateString).getUTCFullYear() !== TODAY.getUTCFullYear() || new Date(dateString).getUTCMonth() !== TODAY.getUTCMonth() || new Date(dateString).getUTCDate() !== TODAY.getUTCDate() )
+  if ( new Date(dateString).getUTCFullYear() !== TODAY.getUTCFullYear() || new Date(dateString).getUTCMonth() !== TODAY.getUTCMonth() || new Date(dateString).getUTCDate() !== TODAY.getUTCDate() )
     setTimeout(timeTravel, 50)
 }
 
 function fitCourseNamesInGraph() {
   var courselines = document.getElementsByClassName('kurs')
-  for(var i = 0; i < courselines.length; i++) {
-    if(document.getElementById('graph').getBoundingClientRect().right - courselines[i].getBoundingClientRect().left - getTextWidth(courselines[i].getElementsByTagName('p')[0].innerHTML) < 0) {
+  for (var i = 0; i < courselines.length; i++) {
+    if (document.getElementById('graph').getBoundingClientRect().right - courselines[i].getBoundingClientRect().left - getTextWidth(courselines[i].getElementsByTagName('p')[0].innerHTML) < 0) {
       courselines[i].getElementsByTagName('p')[0].classList.add('keepinside')
     } else {
       courselines[i].getElementsByTagName('p')[0].classList.remove('keepinside')
