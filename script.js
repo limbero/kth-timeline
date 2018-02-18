@@ -15,6 +15,9 @@ function parseJSON (data) {
   counter++ //use this for progress bar?
   if (counter == config.sheets.length) {
     kurser = kurser.sort(startOchSlutComparator)
+    if (kurser[kurser.length-1].slutdatum !== '') {
+      TODAY = new Date(kurser[kurser.length-1].slutdatum)
+    }
     timeTravel()
   }
 }
