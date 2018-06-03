@@ -16,9 +16,6 @@ h1 {
   position: relative;
   z-index: 1;
 }
-a.github-corner {
-  z-index: 2;
-}
 
 #graph {
   position: relative;
